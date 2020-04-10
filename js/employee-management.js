@@ -6,19 +6,25 @@ let employee = [["Tom Ford", "Boss", 1111],
                     ["Ella Vagner", "Cleaner", 5001]];
 
 
+
+
+
+
 function displayData() {
 
     let table = document.getElementById("Table");
+    
 
 //Amount of employee:
+    let bodyElement = document.querySelector("body");
     let pForEmployeeCount = document.createElement("p");
     let employeeCountText = document.createTextNode("Showing " + employee.length + " employee");
     pForEmployeeCount.appendChild(employeeCountText);
-    let mainElement = document.getElementsByTagName("strong");
-    
+    bodyElement.insertBefore(pForEmployeeCount, table);
 
 for (let i = 0; i < employee.length; i++) {
-    let trTag = document.createElement("tr");    
+    let trTag = document.createElement("tr");
+
     for (let j = 0; j < 3; j++) {
         let thTag = document.createElement("th");
         let text = document.createTextNode(employee[i][j]);
@@ -39,27 +45,36 @@ for (let i = 0; i < employee.length; i++) {
     button.setAttributeNode(att);
     button.setAttributeNode(att1);
     trTag.appendChild(thTagButton);
-
     table.appendChild(trTag);
 
-    table.appendChild(pForEmployeeCount);
 }
 }
 
 function cleanData() {
+    let hide = document.querySelectorAll("tr");
+    for (element of hide) {
+    element.remove();
+    }
+}
 
+function interructWithElements() {
+    let deleteButtons = document.getElementsByClassName("delete");
+    for (let i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].addEventListener("click", () => {
+            employee.splice(deleteButtons[i].value, 1);
+            cleanData();
+            displayData();
+            interructWithElements();
+        }
+        )
+    }
 }
 
 window.addEventListener('load', () => {
 displayData();
-let deleteButtons = document.getElementsByClassName("delete");
-for (element of deleteButtons) {
-    element.addEventListener("click", () => {
-        delete employee[element.value];
-        displayData();
-        // alert("HI");
-    })
-}
+interructWithElements();
+
+
 });
 
 
