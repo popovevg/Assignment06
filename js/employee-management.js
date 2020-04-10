@@ -5,20 +5,29 @@ let employee = [["Tom Ford", "Boss", 1111],
                     ["Victor Gorsky", "ASM", 9009],
                     ["Ella Vagner", "Cleaner", 5001]];
 
+function addNewElement() {
+    let name = document.getElementById("name");
+    let title = document.getElementById("title");
+    let extension = document.getElementById("extension");
+    if (name.value != null && isNaN(name.value) 
+    && title.value != null && isNaN(title.value) 
+    && extension.value != null && !isNaN(extension.value)) {
+        employee.push([name, title, extension]);
+    }
 
-
-
-
+}
 
 function displayData() {
 
     let table = document.getElementById("Table");
-    
 
 //Amount of employee:
     let bodyElement = document.querySelector("body");
     let pForEmployeeCount = document.createElement("p");
-    let employeeCountText = document.createTextNode("Showing " + employee.length + " employee");
+    let att2 = document.createAttribute("id");
+    att2.value = "AmountText";
+    let employeeCountText = document.createTextNode("Showing " + employee.length + " employees");
+    pForEmployeeCount.setAttributeNode(att2);
     pForEmployeeCount.appendChild(employeeCountText);
     bodyElement.insertBefore(pForEmployeeCount, table);
 
@@ -51,6 +60,8 @@ for (let i = 0; i < employee.length; i++) {
 }
 
 function cleanData() {
+    let amountText = document.getElementById("AmountText");
+    amountText.remove();
     let hide = document.querySelectorAll("tr");
     for (element of hide) {
     element.remove();
@@ -73,7 +84,8 @@ function interructWithElements() {
 window.addEventListener('load', () => {
 displayData();
 interructWithElements();
-
+let addButton = document.getElementById("Add");
+addButton.addEventListener("click", addNewElement);
 
 });
 
