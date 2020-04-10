@@ -16,10 +16,10 @@ function addNewElement() {
         cleanData();
         displayData();
         interructWithElements();
+        alert("New employee " + name.value + " was added.");
         name.value = '';
         title.value = '';
         extension.value = '';
-        alert("New employee " + name.value + " was added.");
     }
     else {
         alert("You entered wrong data.")
@@ -31,7 +31,7 @@ function displayData() {
 
     let table = document.getElementById("Table");
 
-//Amount of employee:
+    //Amount of employee:
     let bodyElement = document.querySelector("body");
     let pForEmployeeCount = document.createElement("p");
     let att2 = document.createAttribute("id");
@@ -43,7 +43,6 @@ function displayData() {
     else {
         employeeCountText = document.createTextNode("Your employees list is empty");
     }
-    // let employeeCountText = document.createTextNode("Showing " + employee.length + " employees");
     pForEmployeeCount.setAttributeNode(att2);
     pForEmployeeCount.appendChild(employeeCountText);
     bodyElement.insertBefore(pForEmployeeCount, table);
@@ -80,9 +79,9 @@ function cleanData() {
     let amountText = document.getElementById("AmountText");
     amountText.remove();
     let hide = document.querySelectorAll("tr");
-    for (element of hide) {
-    element.remove();
-    }
+        for (let i = 1; i < hide.length; i++) {
+            hide[i].remove();
+        }
 }
 
 function interructWithElements() {
