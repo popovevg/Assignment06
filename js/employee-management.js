@@ -12,7 +12,17 @@ function addNewElement() {
     if (name.value != null && isNaN(name.value) 
     && title.value != null && isNaN(title.value) 
     && extension.value != null && !isNaN(extension.value)) {
-        employee.push([name, title, extension]);
+        employee.push([name.value, title.value, extension.value]);
+        cleanData();
+        displayData();
+        interructWithElements();
+        name.value = '';
+        title.value = '';
+        extension.value = '';
+        alert("New employee " + name.value + " was added.");
+    }
+    else {
+        alert("You entered wrong data.")
     }
 
 }
@@ -26,7 +36,14 @@ function displayData() {
     let pForEmployeeCount = document.createElement("p");
     let att2 = document.createAttribute("id");
     att2.value = "AmountText";
-    let employeeCountText = document.createTextNode("Showing " + employee.length + " employees");
+    let employeeCountText;
+    if (employee.length > 0) {
+        employeeCountText = document.createTextNode("Showing " + employee.length + " employees");
+    }
+    else {
+        employeeCountText = document.createTextNode("Your employees list is empty");
+    }
+    // let employeeCountText = document.createTextNode("Showing " + employee.length + " employees");
     pForEmployeeCount.setAttributeNode(att2);
     pForEmployeeCount.appendChild(employeeCountText);
     bodyElement.insertBefore(pForEmployeeCount, table);
@@ -86,7 +103,6 @@ displayData();
 interructWithElements();
 let addButton = document.getElementById("Add");
 addButton.addEventListener("click", addNewElement);
-
 });
 
 
